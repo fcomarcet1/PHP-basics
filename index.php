@@ -1,7 +1,10 @@
 <?php
-echo "Hello, World!\n </br>";
+echo "Hello, World Test!\n </br>";
 //printf("%s\n", "Hello, World!");
 //sprintf('%s', 'Hello, World!');
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
 
 ### VARIABLES && VARIABLES TYPES###
 $name = 'Francisco'; //string
@@ -14,6 +17,19 @@ $address2 = (object)['street' => 'Rua dos Bobos', 'number' => '123']; //object
 
 var_dump($address2);
 print_r($address2); //stdClass Object ( [street] => Rua dos Bobos [number] => 123 )
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+
+### PRINT VALUES ###
+echo "My name is $name and I'm $age years old.(without {})\n";
+echo "</br>";
+echo "My name is {$name} and I'm {$age} years old.(with {})\n";
+echo "</br>";
+echo sprintf('My name is %s and I\'m %d years old.(with sprintf)', $name, $age);
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
 
 ### OPERATORS ###
 $x = 1;
@@ -28,6 +44,7 @@ $y = $x++;
 $x = $x + 1;
 $z = $x--;
 $y = $x - 1;
+
 
 ### STRINGS ###
 $name = 'Francisco';
@@ -52,7 +69,7 @@ trim($name); // returns 'Francisco'
 explode(' ', $name); // split a string into array -> returns ['Francisco']
 implode(' ', ['Francisco']); // join array elements in a string ->returns 'Francisco'
 
-// numbers fuctions
+// numbers functions
 $number = 55;
 $number2 = 55.55;
 //echo round($number2); // returns 56
@@ -79,7 +96,7 @@ $list[1][1]; // returns 'test'
 
 // count elements in array
 count($array); // returns 5
-echo sizeof($list); //  sizeof is alias from count consider use count -> returns 2
+//echo sizeof($list); //  sizeof is alias from count consider use count -> returns 2
 
 // Add element to array
 $list[] = 'last item'; // add element to the end of the array
@@ -111,17 +128,73 @@ $fruit = array_pop($stack); // return ["naranja", "plátano", "manzana"]
 // Remove first element from array
 $removed = array_shift($stack); // return ["plátano", "manzana", "frambuesa"]
 
+### CONDITIONALS ###
+$x = 50;
+$y = 125;
+
+if ($x > $y) {
+    echo "x is greater than y";
+} elseif ($x < $y) {
+    echo "x is less than y";
+} else {
+    echo "x is equal to y";
+}
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+$value = 'test';
+echo $value === "test" ? "true" : "false"; // returns "true"*/
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+### LOOPS ###
+$i = 0;
+while ($i < 10) {
+    echo $i;
+    $i++;
+}
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+for ($i = 0; $i < 10; $i++) {
+    echo $i;
+}
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+$listNames = ['Frank', 'John', 'Mary', 'Bob'];
+foreach ($listNames as $name) {
+    echo $name."\n";
+}
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+foreach ($listNames as $key => $value) {
+    echo $key.": ".$value."\n";
+}
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+for ($i = 0; $i < count($listNames); $i++ ){
+    echo $listNames[$i]."\n";
+}
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+// more efficient way to loop through array
+for ($i = 0, $iMax = count($listNames); $i < $iMax; $i++ ){
+    echo $listNames[$i]."\n";
+}
 
 
-/*$number2 = 15;
-$num = 5;
-$place = 'árbol';
-$format = 'Hay %d monos en el %s';
-echo sprintf($format, $num, $place);
-echo "<br>";
-echo "Print variables" . " " . $name . " " ."in screen";
-echo "<br>";
-// return json
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+// ### return json format ###
 $data = ['response' => 'Test request'];
 try {
     echo json_encode($data, JSON_THROW_ON_ERROR);
@@ -129,30 +202,68 @@ try {
 }
 
 echo "</br>";
+echo "<hr size='2px' color='black' />";
 
-// Variables
-$variableName = 'foo';
-$foo = 'bar';
-echo $foo;
-echo $$variableName;
-echo ${$variableName};
+### FUNCTIONS ###
+function test() {
+    echo "test";
+}
 
-// Data types
-$typeVarNull = null;
-$typeVarBoolean = true | false;
-$typeVarInteger = 25;
-$typeVarInteger2 = -3;
-$typeVarFloat = 26.4;
-$typeVarArray = ["A", true, 123 => 5];
+function sendEmail(string $email, string $message): bool {
+    echo "Email sent to: $email with message: $message \n";
+    return true;
+}
+$success = sendEmail('test@test.com', 'test message');
+echo "</br>";
 
-echo $typeVarArray[0]; // Returns "A"
-echo $typeVarArray[1]; // Returns true
-echo $typeVarArray[123]; // Returns 5
-echo $typeVarArray[1234]; // Returns null
+if (!$success) {
+    echo "Error sending email";
+}
+echo "Email sent successfully";
 
-$typeVarString = 'bar';
-$typeVarString[0]; //b
+echo "</br>";
+echo "<hr size='2px' color='black' />";
 
+function testEmail(string $to): bool {
+    $test = 'A';
+    echo "Email sent to: $to \n";
+    return true;
+}
+//var_dump($test); // undefined variable
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+function getPostValue(string $key, $default = null) {
+    if (!isset($_POST[$key])) {
+        return $default;
+    }
+    return $_POST[$key];
+}
+// anonymous function
+$test = function () {
+    echo "test";
+};
+
+$test();
+
+//arrow function
+$printTest = fn() => "test";
+//echo $printTest();
+
+
+$multiply = fn($x, $y) => $x * $y;
+//echo $multiply(2, 3);
+
+echo "</br>";
+echo "<hr size='2px' color='black' />";
+
+$test = 'test';
+$myFunction = function() use ($test) {
+    echo $test;
+};
+
+/**
 // functions
 function add ($number1, $number2) {
     return $number1 + $number2;
