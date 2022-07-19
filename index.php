@@ -92,8 +92,26 @@ $list[3] = 'third item'; // add element to the end of the array
 array_unshift($list, 'first item'); // returns array(4) { [0] => string(8) "first item" [1] => string(1) "1" [2] => array(2) { [0] => string(1) "2" [1] => string(4) "test" } [3] => string(8) "last item" }
 
 // Add element at the end of the array
-// $list[] is x2 faster than array_push
 array_push($list, 'last item'); // returns array(5) { [0] => string(8) "first item" [1] => string(1) "1" [2] => array(2) { [0] => string(1) "2" [1] => string(4) "test" } [3] => string(8) "last item" [4] => string(8) "last item" }
+$list[] = 'last item'; // $list[] is x2 faster than array_push
+
+// Check if array contains element
+in_array(1, $list); // returns true
+
+//Check if array contains element at specific index
+$list2 = ['a', 'b', 'c', 'd', 'e'];
+array_search(1, $list); // returns 1
+array_search('a', $list2); // returns 0
+array_search('b', $list2); // returns 1
+
+// Remove last element from array
+$stack = ["naranja", "plátano", "manzana", "frambuesa"];
+$fruit = array_pop($stack); // return ["naranja", "plátano", "manzana"]
+
+// Remove first element from array
+$removed = array_shift($stack); // return ["plátano", "manzana", "frambuesa"]
+
+
 
 /*$number2 = 15;
 $num = 5;
